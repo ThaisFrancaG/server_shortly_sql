@@ -6,5 +6,6 @@ const urlsRouter = Router();
 
 urlsRouter.post("/urls/shorten", validateTokenMiddleware, postUrl);
 urlsRouter.get("/urls/:shortUrl", getUrl);
-urlsRouter.delete("urls/:id", validateTokenMiddleware, deleteUrl);
+urlsRouter.delete("/urls/:id", validateTokenMiddleware, deleteUrl);
+
 export default urlsRouter;
