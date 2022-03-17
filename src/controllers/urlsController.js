@@ -6,7 +6,8 @@ export async function postUrl(req, res) {
     if (!url) {
       return res.sendStatus(422);
     }
-    let urlCode = Date.now();
+    let urlCode = parseInt(Math.random() * (999999 - 111111));
+
     let shortUrl = `srtly${urlCode}`;
 
     await connection.query(
@@ -23,3 +24,29 @@ export async function postUrl(req, res) {
     return res.sendStatus(500);
   }
 }
+
+export async function getUrl(req, res) {
+  try {
+    const { shortUrl } = req.params;
+
+    let checkUrl = await connection.query(
+      `
+        SELECT * FROM urls WHERE "shortUrl"=$1;
+        `,
+      [`srtly${shortUrl}`]
+    );
+
+    console.log(checkUrl.rows);
+    console.log(checkUrl.rows[0]);
+
+    if (checkUrl.rows.length === 0) {
+      return res.sendStatus(404);
+    }
+    res.status(200).send(checkUrl.rows[0]);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+export async function deleteUrl(req, res) {}

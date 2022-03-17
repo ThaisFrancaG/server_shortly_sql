@@ -1,7 +1,6 @@
 import { connection } from "../database.js";
 
 export async function validateTokenMiddleware(req, res, next) {
-  console.log("valida Token foi chamado");
   const authorization = req.headers.authorization;
   const token = authorization?.replace("Bearer ", "");
   if (!token) {
