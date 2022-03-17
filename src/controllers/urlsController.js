@@ -36,9 +36,6 @@ export async function getUrl(req, res) {
       [`srtly${shortUrl}`]
     );
 
-    console.log(checkUrl.rows);
-    console.log(checkUrl.rows[0]);
-
     if (checkUrl.rows.length === 0) {
       return res.sendStatus(404);
     }
@@ -49,4 +46,10 @@ export async function getUrl(req, res) {
   }
 }
 
-export async function deleteUrl(req, res) {}
+export async function deleteUrl(req, res) {
+  try {
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
